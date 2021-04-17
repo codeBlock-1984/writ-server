@@ -16,6 +16,12 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       });
+
+      users.hasMany(models.articles, {
+        foreignKey: 'userid',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      });
     }
   };
   users.init({

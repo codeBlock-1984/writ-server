@@ -44,11 +44,28 @@ class UserController extends BaseController {
 
   static async list(req, res, next) {
     try {
-      const data = await Logic.UserLogic.list();
+      const page = req.query.page ? req.query.page : 1;
+      const limit = req.query.limit ? req.query.limit : 10;
+      const data = await Logic.UserLogic.list(page, limit);
       res.locals.data = UserController.success(200, `Users fetched successfully`, data);
     } catch (error) {
       res.locals.error = error;
       res.locals.data = UserController.failure(400, `Users could not be fetched`);
+    } finally {
+      next();
+    }
+  }
+
+  static async getArticles(req, res, next) {
+    try {
+      const { id } = req.params;
+      const page = req.query.page ? req.query.page : 1;
+      const limit = req.query.limit ? req.query.limit : 10;
+      const data = await Logic.UserLogic.getArticles(id, page, limit);
+      res.locals.data = UserController.success(200, `User ${id}'s articles fetched successfully`, data);
+    } catch (error) {
+      res.locals.error = error;
+      res.locals.data = UserController.failure(400, `User ${id}'s articles could not be fetched`);
     } finally {
       next();
     }

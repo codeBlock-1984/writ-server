@@ -5,6 +5,7 @@ const articleInterface = new Entity.ArticleEntity(
   Helper.dataTypes.string,
   Helper.dataTypes.string,
   Helper.dataTypes.string,
+  Helper.dataTypes.number,
   Helper.dataTypes.number
 );
 

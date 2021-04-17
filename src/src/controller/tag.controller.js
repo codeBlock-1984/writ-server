@@ -44,7 +44,9 @@ class TagController extends BaseController {
 
   static async list(req, res, next) {
     try {
-      const data = await Logic.TagLogic.list();
+      const page = req.query.page ? req.query.page : 1;
+      const limit = req.query.limit ? req.query.limit : 10;
+      const data = await Logic.TagLogic.list(page, limit);
       res.locals.data = TagController.success(200, `Tags fetched successfully`, data);
     } catch (error) {
       res.locals.error = error;

@@ -44,7 +44,9 @@ class ClientController extends BaseController {
 
   static async list(req, res, next) {
     try {
-      const data = await Logic.ClientLogic.list();
+      const page = req.query.page ? req.query.page : 1;
+      const limit = req.query.limit ? req.query.limit : 10;
+      const data = await Logic.ClientLogic.list(page, limit);
       res.locals.data = ClientController.success(200, `Clients fetched successfully`, data);
     } catch (error) {
       res.locals.error = error;

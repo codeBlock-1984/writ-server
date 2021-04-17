@@ -23,6 +23,13 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       });
+
+      articles.belongsTo(models.users, {
+        foreignKey: 'userid',
+        targetKey: 'id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      });
     }
   };
   articles.init({
@@ -34,6 +41,7 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     slug: DataTypes.STRING,
     content: DataTypes.TEXT,
+    userid: DataTypes.INTEGER,
     genreid: DataTypes.INTEGER,
     recordstatus: DataTypes.INTEGER,
     createdat: DataTypes.DATE,

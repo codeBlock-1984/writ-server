@@ -1,4 +1,5 @@
 import BaseLogic from './base.logic';
+import ArticleLogic from './article.logic';
 import Repository from '../repository';
 
 class UserLogic extends BaseLogic {
@@ -24,6 +25,10 @@ class UserLogic extends BaseLogic {
 
   static async list(page=1, limit=10, where={}, include=null, options={}) {
     return await Repository.UserRepository.list(UserLogic.model(), '/users/', page, limit, where, include, options);
+  }
+
+  static async getArticles(id, page=1, limit=10, include=null, options={}) {
+    return await ArticleLogic.list(page, limit, { userid: id }, include, options);
   }
 }
 

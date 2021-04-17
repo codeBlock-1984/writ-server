@@ -44,7 +44,9 @@ class GenreController extends BaseController {
 
   static async list(req, res, next) {
     try {
-      const data = await Logic.GenreLogic.list();
+      const page = req.query.page ? req.query.page : 1;
+      const limit = req.query.limit ? req.query.limit : 10;
+      const data = await Logic.GenreLogic.list(page, limit);
       res.locals.data = GenreController.success(200, `Genres fetched successfully`, data);
     } catch (error) {
       res.locals.error = error;
