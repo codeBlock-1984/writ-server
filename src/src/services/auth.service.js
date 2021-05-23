@@ -13,6 +13,11 @@ class AuthService {
     const result = await makeRequest.send('login', 'POST', data);
     return result;
   }
+
+  static async verify(token) {
+    const result = await makeRequest.send('verify', 'POST', { token });
+    return result;
+  }
 }
 
 export default AuthService;

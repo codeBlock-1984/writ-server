@@ -25,6 +25,11 @@ class TagLogic extends BaseLogic {
   static async list(page=1, limit=10, where={}, include=null, options={}) {
     return await Repository.TagRepository.list(TagLogic.model(), '/tags/', page, limit, where, include, options);
   }
+
+  static async search(query) {
+    return await Repository.TagRepository.search(query);
+  }
+
 }
 
 export default TagLogic;

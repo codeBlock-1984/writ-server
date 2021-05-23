@@ -28,6 +28,18 @@ class AuthController extends BaseController {
       next();
     }
   }
+
+  static async verify(req, res, next) {
+    try {
+      const data = await Logic.AuthLogic.verify(req.body.token);
+      res.locals.data = AuthController.success(200, `Token successfully verified`, data);
+    } catch (error) {
+      res.locals.error = error;
+      res.locals.data = AuthController.failure(400, `Token verification failed`);
+    } finally {
+      next();
+    }
+  }
 }
 
 export default AuthController;
