@@ -31,6 +31,15 @@ class ValidatorUtil {
       }
     }
 
+    if (type === Helper.dataTypes.array) {
+      if (Array.isArray(val)) {
+        res = true;
+        if (check && val === false) {
+          res = false;
+        }
+      }
+    }
+
     return res;
   }
 }

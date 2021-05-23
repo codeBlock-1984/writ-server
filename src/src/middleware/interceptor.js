@@ -11,7 +11,6 @@ class Interceptor {
     res.locals.requestId = Util.StringUtil.generateUUID();
     if (res.locals.error) {
       const error = res.locals.error;
-      console.log(error.message);
       console.trace(error);
       if (error.stack) console.log(error.stack);
     }

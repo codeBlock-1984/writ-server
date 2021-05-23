@@ -7,6 +7,16 @@ class TagRepository extends BaseRepository {
     return db[name];
   }
 
+  static async search(query) {
+    return await db.tags.findAll({
+      where: {
+        name: {
+          [db.Sequelize.Op.iLike]: `${query}%` 
+        }
+      }
+    });
+  }
+
 }
 
 export default TagRepository;

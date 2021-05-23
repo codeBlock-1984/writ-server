@@ -11,6 +11,10 @@ class UserLogic extends BaseLogic {
     return await Repository.UserRepository.get(id, UserLogic.model());
   }
 
+  static async getByAuth(id) {
+    return await Repository.UserRepository.getByAuth(id, UserLogic.model());
+  }
+
   static async create(data) {
     return await Repository.UserRepository.create(data, UserLogic.model());
   }

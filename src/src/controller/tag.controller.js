@@ -55,6 +55,19 @@ class TagController extends BaseController {
       next();
     }
   }
+
+  static async search(req, res, next) {
+    try {
+      const q  = req.query.q;
+      const data = await Logic.TagLogic.search(q);
+      res.locals.data = TagController.success(200, `Tags searched with query ${q} successfully`, data);
+    } catch (error) {
+      res.locals.error = error;
+      res.locals.data = TagController.failure(400, `Tag search with query ${q} failed`);
+    } finally {
+      next();
+    }
+  }
 }
 
 export default TagController;

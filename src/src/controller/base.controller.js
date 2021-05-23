@@ -13,7 +13,7 @@ class BaseController {
   static parseUpdateData(entity, data) {
     const parsed = {};
     const fields = Object.keys(entity);
-
+    
     for (let field of fields) {
       if (Util.ValidatorUtil.type(entity[field], data[field])) {
         parsed[field] = data[field];

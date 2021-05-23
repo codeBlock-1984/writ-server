@@ -7,6 +7,9 @@ class UserRepository extends BaseRepository {
     return db[name];
   }
 
+  static async getByAuth(id, model) {
+    return await model.findOne({ where: { userauthid: id }, raw: true, options: {} });
+  }
 }
 
 export default UserRepository;
