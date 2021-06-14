@@ -46,7 +46,9 @@ class ArticleController extends BaseController {
     try {
       const page = req.query.page ? req.query.page : 1;
       const limit = req.query.limit ? req.query.limit : 10;
-      const data = await Logic.ArticleLogic.list(page, limit);
+      const genreid = req.query.genre;
+      const where = genreid ? { genreid } : {};
+      const data = await Logic.ArticleLogic.list(page, limit, where);
       res.locals.data = ArticleController.success(200, `Articles fetched successfully`, data);
     } catch (error) {
       res.locals.error = error;

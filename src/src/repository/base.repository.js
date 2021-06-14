@@ -33,8 +33,8 @@ class BaseRepository {
 
   static async list(model, path, page=1, limit=10, where={}, include=null, options={}) {
     const offset = ((Number(page) - 1) * limit) || 0;
-    let queryParams = { where, page, limit, offset, raw: true, ...options };
-    if (include) queryParams = { include, ...queryParams };
+    let queryParams = { where, page, limit, offset, ...options };
+    if (include) queryParams = { ...queryParams, include };
     const result = await model.findAndCountAll(queryParams);
     return BaseRepository.paginate(result, path, page, limit);
   }

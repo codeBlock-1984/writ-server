@@ -28,7 +28,7 @@ class ArticleLogic extends BaseLogic {
     return await Repository.ArticleRepository.update(id, data);
   }
 
-  static async list(page=1, limit=10, where={}, include=null, options={}) {
+  static async list(page=1, limit=10, where={}, include={ all: true, nested: true }, options={}) {
     return await Repository.ArticleRepository.list(ArticleLogic.model(), '/articles/', page, limit, where, include, options);
   }
 

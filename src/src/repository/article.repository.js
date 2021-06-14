@@ -8,8 +8,10 @@ class ArticleRepository extends BaseRepository {
   }
 
   static async getBySlug(slug) {
-    const data = await db.articles.findOne({ where: { slug }, raw: true, options: { } });
-    const tags = await db.articletags.findAll({ where: { articleid: data.id }, raw: true, include: { model: db.tags } });
+    const res = await db.articles.findAll({ where: { slug: slug }, include: { all: true, nested: true } });
+    const data = res[0].dataValues;
+    const aTags = await db.articletags.findAll({ where: { articleid: data.id }, include: { model: db.tags, nested: true } });
+    const tags = aTags.map(i => i.tag);
     return { ...data, tags };
   }
 
